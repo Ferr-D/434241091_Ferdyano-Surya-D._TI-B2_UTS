@@ -10,6 +10,10 @@ class Dashboard extends StatelessWidget {
         title: const Text('Dashboard'),
         actions: [
           IconButton(
+            icon: const Icon(Icons.notifications),
+            onPressed: () => Navigator.pushNamed(context, '/notification'),
+          ),
+          IconButton(
             icon: const Icon(Icons.person),
             onPressed: () => Navigator.pushNamed(context, '/profile'),
           ),
@@ -26,7 +30,7 @@ class Dashboard extends StatelessWidget {
             ),
             const SizedBox(height: 16),
 
-            // Ringkasan Tiket (FR-008)
+            // Implementasi Card Statistik menggunakan Row & Expanded untuk UI Responsive
             Row(
               children: [
                 _buildStatCard('Total Tiket', '24', Colors.blue),

@@ -90,10 +90,18 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: const Text('Login'),
                 ),
 
+                // Fitur Lupa Password (FR-004)
+                TextButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/reset_password');
+                  },
+                  child: const Text('Lupa Password?'),
+                ),
+
                 // Fitur Register (FR-003)
                 TextButton(
                   onPressed: () {
-                    // Navigasi ke halaman Register
+                    Navigator.pushNamed(context, '/register');
                   },
                   child: const Text('Belum punya akun? Daftar sekarang'),
                 ),

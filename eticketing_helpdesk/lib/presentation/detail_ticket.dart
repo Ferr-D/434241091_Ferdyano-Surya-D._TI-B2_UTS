@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'widgets/admin_ticket_action.dart';
 
 class DetailTicketScreen extends StatefulWidget {
   final Map<String, dynamic> ticket;
@@ -14,7 +15,22 @@ class _DetailTicketScreenState extends State<DetailTicketScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Detail ${widget.ticket['id']}')),
+      appBar: AppBar(
+        title: Text('Detail ${widget.ticket['id']}'),
+        actions: [
+          // Tombol khusus Admin (FR-006)
+          IconButton(
+            icon: const Icon(Icons.admin_panel_settings),
+            tooltip: 'Tindakan Admin',
+            onPressed: () {
+              showModalBottomSheet(
+                context: context,
+                builder: (context) => const AdminTicketActions(),
+              );
+            },
+          ),
+        ],
+      ),
       body: Column(
         children: [
           Expanded(
@@ -28,6 +44,15 @@ class _DetailTicketScreenState extends State<DetailTicketScreen> {
                 const Divider(height: 32),
                 const Text('Deskripsi Keluhan:', style: TextStyle(fontWeight: FontWeight.bold)),
                 const Text('Masalah jaringan di ruang praktikum lantai 2.'),
+                const SizedBox(height: 24),
+
+                // FR-010 & FR-011: Riwayat & Tracking Tiket
+                const Text('Riwayat & Tracking Tiket:', style: TextStyle(fontWeight: FontWeight.bold)),
+                const SizedBox(height: 8),
+                _buildTrackingItem(Icons.check_circle, 'Tiket Selesai', '22 Apr 2026 14:00', Colors.grey),
+                _buildTrackingItem(Icons.sync, 'Diproses oleh Teknisi (Budi)', '21 Apr 2026 09:30', Colors.blue),
+                _buildTrackingItem(Icons.assignment, 'Tiket Dibuat', '20 Apr 2026 08:15', Colors.green),
+
                 const SizedBox(height: 24),
                 const Text('Komentar & Balasan:', style: TextStyle(fontWeight: FontWeight.bold)),
                 // Contoh tampilan reply/komentar (FR-005: 5)
@@ -60,6 +85,29 @@ class _DetailTicketScreenState extends State<DetailTicketScreen> {
                     _commentController.clear();
                   },
                 ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // Widget bantuan untuk menampilkan item tracking (FR-010 & FR-011)
+  Widget _buildTrackingItem(IconData icon, String title, String time, Color color) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 16.0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Icon(icon, color: color, size: 24),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(title, style: const TextStyle(fontWeight: FontWeight.w500)),
+                Text(time, style: const TextStyle(fontSize: 12, color: Colors.grey)),
               ],
             ),
           ),

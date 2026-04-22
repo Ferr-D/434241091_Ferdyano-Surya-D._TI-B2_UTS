@@ -4,6 +4,9 @@ import 'presentation/dashboard.dart';
 import 'presentation/list_ticket.dart';
 import 'presentation/create_ticket.dart';
 import 'presentation/profile_screen.dart';
+import 'presentation/register_screen.dart';
+import 'presentation/reset_password_screen.dart';
+import 'presentation/notification_screen.dart';
 
 // ValueNotifier global untuk mengontrol tema aplikasi
 final ValueNotifier<ThemeMode> themeNotifier = ValueNotifier(ThemeMode.light);
@@ -45,6 +48,9 @@ class TicketingApp extends StatelessWidget {
             '/list_ticket': (context) => const TicketListScreen(),
             '/create_ticket': (context) => const CreateTicketScreen(),
             '/profile': (context) => const ProfileScreen(),
+            '/register': (context) => const RegisterScreen(),
+            '/reset_password': (context) => const ResetPasswordScreen(),
+            '/notification': (context) => const NotificationScreen(),
           },
         );
       },
