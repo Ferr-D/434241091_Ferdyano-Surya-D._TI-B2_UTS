@@ -25,7 +25,6 @@ class TicketingApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           // Light theme
           theme: ThemeData(
-            primarySwatch: Colors.blue,
             useMaterial3: true,
             brightness: Brightness.light,
             colorSchemeSeed: Colors.blue,
